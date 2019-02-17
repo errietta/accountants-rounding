@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+- '8.10'
+install:
+  - npm install -g serverless
+  - sudo pip install awscli
+
+script: bash deploy_script.sh
