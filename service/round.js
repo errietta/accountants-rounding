@@ -64,7 +64,7 @@ module.exports.doRound = async (event, context) => {
     numUse++;
   }
 
-  ddbWrapper.addToTable({
+  await ddbWrapper.addToTable({
     id: user.Items[0].id,
     password: user.Items[0].password,
     apiKey: user.Items[0].apiKey,

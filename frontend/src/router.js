@@ -24,7 +24,12 @@ export default new Router({
     {
       path: '/get-key',
       name: 'getKey',
-      component: () => import(/* webpackChunkName: "getKey" */ './views/getKey.vue')
+      component: () => import(/* webpackChunkName: "getKey" */ './views/GetKey.vue')
+    },
+    {
+      path: '/docs',
+      name: 'docs',
+      component: () => import(/* webpackChunkName: "getKey" */ './views/Docs.vue')
     },
   ]
 })
