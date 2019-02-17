@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x #echo on
 
-if [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then0i
+if [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
   cd service
   npm install
