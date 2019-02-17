@@ -27,10 +27,24 @@
       {
         "numbers": ["1.0232","1.2","1.2222"],
         "decimals": "3",
-        "apiKey": "YourApiKey"
+        "apiKey": "{{apiKey}}"
       }
 
     </pre>
+
+    CURL:
+    <pre>
+      curl --request POST \
+      --url https://api.accountants-rounding.com/api/round \
+      --header 'content-type: application/json' \
+      --data '
+      {
+        "numbers": ["1.0232","1.2","1.2222"],
+        "decimals": "3",
+        "apiKey": "{{apiKey}}"
+      }'
+    </pre>
+
     Response:
     <pre>
       {
@@ -39,3 +53,15 @@
     </pre>
   </div>
 </template>
+
+
+<script>
+export default {
+  name: 'docs',
+  data() {
+    return {
+      apiKey: window.sessionStorage.getItem('api-key') || 'YOUR_API_KEY',
+    }
+  }
+}
+</script>
