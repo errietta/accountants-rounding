@@ -7,6 +7,10 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <footer>
+      <a href='https://github.com/errietta/accountants-rounding'>Github</a> |
+      Made by <a href='https://errietta.me'>errietta.me</a>
+    </footer>
   </div>
 </template>
 
@@ -17,5 +21,11 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+footer {
+  position: absolute;
+  width: 90%;
+  bottom: 10px;
 }
 </style>
