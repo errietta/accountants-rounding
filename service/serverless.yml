@@ -1,0 +1,114 @@
+service: accountants-rounding-service
+
+plugins:
+  - serverless-offline
+  - serverless-domain-manager
+
+resources:
+  Resources:
+    UsersDDBTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "id"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 2
+          WriteCapacityUnits: 2
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+    #ArApiGateway:
+    #  Type: AWS::ApiGateway::RestApi
+    #  Properties:
+    #    Name: ArApiGateway
+
+  #Outputs:
+  #  apiGatewayRestApiId:
+  #    Value:
+  #      Ref: ArApiGateway
+  #    Export:
+  #      Name: ArApiGateway-restApiId
+
+  #  apiGatewayRestApiRootResourceId:
+  #    Value:
+  #      Fn::GetAtt:
+  #       - ArApiGateway
+  #       - RootResourceId
+  #    Export:
+  #      Name: ArApiGateway-rootResourceId
+
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-2
+
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${self:provider.stage}
+    REGION: ${self:provider.region}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+  #apiGateway:
+  #  restApiId:
+  #    'Fn::ImportValue': ArApiGateway-restApiId
+  #  restApiRootResourceId:
+  #    'Fn::ImportValue': ArApiGateway-rootResourceId
+
+
+  #apiGateway:
+  #  restApiId:
+  #    Ref: ArApiGateway
+  #  restApiResourceId:
+  #    Fn::GetAtt:
+  #      - ArApiGateway
+  #      - RootResourceId
+
+functions:
+  getApiKey:
+    handler: auth.getApiKey
+    events:
+      - http:
+          path: get-key
+          method: post
+          cors: true
+
+  resetApiKey:
+    handler: auth.resetApiKey
+    events:
+      - http:
+          path: reset-key
+          method: post
+          cors: true
+
+  doRound:
+    handler: round.doRound
+    events:
+      - http:
+          path: round
+          method: post
+          cors: true
+
+custom:
+  customDomain:
+    domainName: 'api.accountants-rounding.com'
+    basePath: 'api'
+    stage: ${self:provider.stage}
+    createRoute53Record: true

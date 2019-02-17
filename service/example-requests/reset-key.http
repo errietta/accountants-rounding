@@ -1,0 +1,7 @@
+POST http://localhost:3000/users/reset-key
+Content-Type: application/json
+
+{
+  "email": "errietta@errietta.me",
+  "password": "foo"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "accountants-rounding-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.404.0",
+    "bcrypt": "^3.0.4",
+    "eslint": "^5.14.0",
+    "random-string": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "serverless-domain-manager": "^2.6.13",
+    "serverless-offline": "^4.4.2"
+  },
+  "scripts": {
+    "test": "true"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,7 @@
+POST https://api.accountants-rounding.com/api/get-key
+Content-Type: application/json
+
+{
+  "email": "errietta@errietta.me",
+  "password": "foo"
+}

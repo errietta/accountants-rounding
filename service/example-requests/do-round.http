@@ -1,0 +1,8 @@
+POST https://api.accountants-rounding.com/api/round
+Content-Type: application/json
+
+{
+  "numbers": ["1.0232"],
+  "decimals": "3",
+  "apiKey": "apiKey"
+}
